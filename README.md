@@ -49,7 +49,7 @@ npm run dev
 ## ▶️ Live Demo
 
 ```
-https://your-app.vercel.app
+https://Cocktail-app.vercel.app
 ```
 
 ---
