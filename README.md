@@ -73,5 +73,3 @@ Mikołaj Michalak
 Computer Science student  
 Frontend Developer in progress
 
-GitHub:
-https://github.com/YOUR_NAME
