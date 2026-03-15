@@ -1,12 +1,15 @@
 import { useEffect,useState } from 'react'
+import { BrowserRouter, Routes, Route, Navigate, Link, useParams } from 'react-router-dom';
 import './App.css'
 
 function App() {
   return (
-    <>
-    <Header/>
-    <Parent/>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/page/:pageId" element={<Parent />} />
+        <Route path="*" element={<Navigate to="/page/1" replace />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
@@ -25,43 +28,85 @@ interface CocktailProps {
   setDane:(value:SingleCocktail[]) => void
 }
 
+interface HeaderProps {
+  name:string,
+  setName:(value:string)=>void
+}
+
 function Parent(){
+  const [name,setName] = useState('');
+  const { pageId } = useParams();
   const [dane,setDane] = useState<SingleCocktail[]>([]);
-    useEffect(()=>{
+  
+  useEffect(()=>{
    const FetchCoctails = async  () =>{
     try {
-      const data = await fetch('https://cocktails.solvro.pl/api/v1/cocktails?page=1&perPage=50');
-      const res = await data.json();
-      setDane(res.data);
+      
+      const response1 = await fetch('https://cocktails.solvro.pl/api/v1/cocktails?page=1&perPage=50');
+      const data1 = await response1.json();
+
+      const response2 = await fetch('https://cocktails.solvro.pl/api/v1/cocktails?page=2&perPage=50');
+      const data2 = await response2.json();
+
+      const response3 = await fetch('https://cocktails.solvro.pl/api/v1/cocktails?page=3&perPage=50');
+      const data3 = await response3.json();
+
+      const response4 = await fetch('https://cocktails.solvro.pl/api/v1/cocktails?page=4&perPage=50');
+      const data4 = await response4.json();
+
+      const response5 = await fetch('https://cocktails.solvro.pl/api/v1/cocktails?page=5&perPage=50');
+      const data5 = await response5.json();
+
+      
+      const allCocktails = [
+        ...data1.data, 
+        ...data2.data, 
+        ...data3.data, 
+        ...data4.data, 
+        ...data5.data
+      ];
+
+      setDane(allCocktails);
     }
     catch (e) {
       console.log(e);
     }
     };
+    
     FetchCoctails();
-  },[setDane]);
+  },[]);
+
+  const filterCocktails = dane.filter((item)=>item.name.toLowerCase().includes(name.toLowerCase()))
+  
+  const currentPage = parseInt(pageId || '1');
+  const startIndex = (currentPage - 1) * 50;
+  const currentCocktails = filterCocktails.slice(startIndex, startIndex + 50);
+
   return(
     <>
-    <Api dane = {dane} setDane = {setDane}/>
+      <Api dane={currentCocktails} setDane={setDane}/>
+      <Header name = {name} setName = {setName}/>
     </>
   )
 }
 
-function Header(){
+function Header({name,setName}:HeaderProps){
   return (
     <div className='Header'>
-      <div><nav>Home</nav></div>
+      <div><nav><Link to="/page/1" style={{color: 'white', textDecoration: 'none'}}>Home</Link></nav></div>
       <div>
         <input className='Search-bar'
         placeholder='Search a cocktail'
+        value = {name}
+        onChange = {(e)=>setName(e.target.value)}
         />
       </div>
-      <div className='Numbers'>
-        <p>1</p>
-        <p>2</p>
-        <p>3</p>
-        <p>4</p>
-        <p>5</p>
+      <div className='Numbers' style={{display: 'flex', gap: '10px'}}>
+        <Link to="/page/1">1</Link>
+        <Link to="/page/2">2</Link>
+        <Link to="/page/3">3</Link>
+        <Link to="/page/4">4</Link>
+        <Link to="/page/5">5</Link>
       </div>
     </div>
   )
@@ -73,12 +118,20 @@ function Api({dane}:CocktailProps){
       <div className='grid-elements'>
         {dane.map((item)=>(
           <div key={item.id} className='card'>
-            <p>{item.id}</p>
+            <div className='upper-one'>
+              <p>{item.id}</p>
+              <div className='above'>
+                <p>Ulubiony</p>
+                <input
+                type = "checkbox"
+                />
+              </div>
+            </div>
             <p>{item.name}</p>
             <p>{item.category}</p>
             <p>{item.glass}</p>
             <p>{item.alcoholic ? 'Alcoholic' : 'Non-alcoholic'}</p>
-            <img src={item.imageUrl} alt={item.name}/>
+            <img  src={item.imageUrl} alt={item.name}/>
           </div>
         ))}
       </div>

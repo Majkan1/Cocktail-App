@@ -1,0 +1,68 @@
+.Header{
+    background-color: yellow;
+    height:60px;
+    width:1520px;
+    position: absolute;
+    top:0px;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+}
+
+nav{
+    margin: 0 10px;
+}
+
+.Numbers{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+    gap:10px;
+    margin-right: 10px;
+}
+
+.Search-bar{
+    width:250px;
+    border-radius: 25px;
+    height: 30px;
+    border:1px solid white;
+    padding: 3px 8px;
+}
+
+.Search-bar:focus{
+    border:1px solid white;
+}
+
+.grid-elements{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 250px));
+    gap:16px;
+    padding: 20px;
+    margin-top: 60px; 
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.card img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.upper-one{
+    display: flex;
+    justify-content: space-between;
+}
+
+.above{
+    display: flex;
+}
