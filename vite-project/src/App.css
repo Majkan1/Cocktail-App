@@ -1,14 +1,39 @@
+body{
+    margin:20px 0px;
+}
+
 .Header{
     background-color: yellow;
-    height:60px;
-    width:1520px;
+    height: 60px;
+    width: 100%; 
     position: absolute;
-    top:0px;
+    top: 0px;
+    left: 0px;
     display: flex;
     flex-direction: row;
-    justify-content:space-between;
+    justify-content: space-between;
     align-items: center;
 }
+
+@media (min-width: 726px) and (max-width: 1024px) {
+    .Header {
+        width: 100%;
+    }
+}
+
+@media (max-width: 725px) {
+    .Header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px 0;
+        gap: 10px;
+    }
+
+    .Search-bar {
+        width: 180px;
+    }
+}
+
 
 nav{
     margin: 0 10px;
@@ -36,7 +61,7 @@ nav{
 
 .grid-elements{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 250px));
+    grid-template-columns: repeat(auto-fit, minmax(230px, 280px));
     gap:16px;
     padding: 20px;
     margin-top: 60px; 
