@@ -73,7 +73,7 @@ function Parent(){
         allCocktails.map(async (cocktail) => {
           const res = await fetch(`https://cocktails.solvro.pl/api/v1/cocktails/${cocktail.id}`);
           const json = await res.json();
-          return json;
+          return json.data;
         })
       );
       setDane(List);
