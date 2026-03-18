@@ -4,7 +4,7 @@ A React + TypeScript app for browsing cocktails using the [KNS Cocktails API](ht
 
 ## 🚀 Live Demo
 
-> Add your deployed link here (e.g. Vercel / Netlify / GitHub Pages)
+https://majkan1.github.io/Cocktail-App/
 
 ## 📸 Preview
 
@@ -75,8 +75,6 @@ This project uses the **KNS Cocktails API**:
 |---|---|
 | `GET /api/v1/cocktails?page=N&perPage=50` | Paginated list of cocktails |
 | `GET /api/v1/cocktails/{id}` | Single cocktail with full ingredient details |
-
-> Ingredients are only available via the single cocktail endpoint `/cocktails/{id}`, not the list endpoint.
 
 ---
 
