@@ -137,12 +137,12 @@ function Api({dane}:CocktailProps){
                 />
               </div>
             </div>
-            <p>{item.name}</p>
-            <p>{item.category}</p>
-            <p>{item.glass}</p>
-            <p>{item.alcoholic ? 'Alcoholic' : 'Non-alcoholic'}</p>
+            <p style={{margin:'2px'}}>{item.name}</p>
+            <p style={{margin:'2px'}}>{item.category}</p>
+            <p style={{margin:'2px'}}>{item.glass}</p>
+            <p style={{margin:'2px'}}>{item.alcoholic ? 'Alcoholic' : 'Non-alcoholic'}</p>
             <img  src={item.imageUrl} alt={item.name}/>
-            <p>{item.ingredients?.map(i=>i.name).join(',')}</p>
+            <p style={{margin:'2px'}}>{item.ingredients?.map(i=>i.name).join(',')}</p>
           </div>
         ))}
       </div>
