@@ -111,16 +111,6 @@ src/
 
 ---
 
-## Roadmap
-
-- [ ] Add search by ingredient
-- [ ] Add filter by category (Cocktail, Ordinary Drink, Shot, etc.)
-- [ ] Persist favourites to localStorage so they survive page refresh
-- [ ] Add a cocktail detail modal with full ingredient list and instructions
-- [ ] Add Vitest tests for `parseIngredients` utility
-
----
-
 ## License
 
 MIT
