@@ -13,6 +13,9 @@ function App() {
   )
 }
 
+interface Ingredient {
+  name:string
+}
 interface SingleCocktail {
   id:number,
   name:string,
@@ -20,7 +23,8 @@ interface SingleCocktail {
   category:string,
   instructions:string,
   alcoholic:boolean,
-  imageUrl:string
+  imageUrl:string,
+  ingredients:Ingredient[]
 }
 
 interface CocktailProps {
@@ -56,7 +60,6 @@ function Parent(){
 
       const response5 = await fetch('https://cocktails.solvro.pl/api/v1/cocktails?page=5&perPage=50');
       const data5 = await response5.json();
-
       
       const allCocktails = [
         ...data1.data, 
@@ -66,7 +69,14 @@ function Parent(){
         ...data5.data
       ];
 
-      setDane(allCocktails);
+      const  List= await Promise.all(
+        allCocktails.map(async (cocktail) => {
+          const res = await fetch(`https://cocktails.solvro.pl/api/v1/cocktails/${cocktail.id}`);
+          const json = await res.json();
+          return json;
+        })
+      );
+      setDane(List);
     }
     catch (e) {
       console.log(e);
@@ -132,6 +142,7 @@ function Api({dane}:CocktailProps){
             <p>{item.glass}</p>
             <p>{item.alcoholic ? 'Alcoholic' : 'Non-alcoholic'}</p>
             <img  src={item.imageUrl} alt={item.name}/>
+            <p>{item.ingredients?.map(i=>i.name).join(',')}</p>
           </div>
         ))}
       </div>
