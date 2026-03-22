@@ -29,7 +29,8 @@ interface SingleCocktail {
 
 interface CocktailProps {
   dane:SingleCocktail[],
-  setDane:(value:SingleCocktail[]) => void
+  favoriteIds:number[],
+  onToggleFavorite:(cocktailId:number)=>void
 }
 
 interface HeaderProps {
@@ -41,6 +42,21 @@ function Parent(){
   const [name,setName] = useState('');
   const { pageId } = useParams();
   const [dane,setDane] = useState<SingleCocktail[]>([]);
+  const [favs, setFavs] = useState<number[]>(JSON.parse(localStorage.getItem('favoriteCocktailIds') || '[]'));
+
+  useEffect(() => {
+    localStorage.setItem('favoriteCocktailIds', JSON.stringify(favs));
+  }, [favs]);
+
+  const handleToggleFavorite = (cocktailId:number) => {
+    let arr = [...favs];
+    if(arr.includes(cocktailId)){
+      arr = arr.filter((id) => id !== cocktailId);
+    } else {
+      arr.push(cocktailId);
+    }
+    setFavs(arr);
+  };
   
   useEffect(()=>{
    const FetchCoctails = async  () =>{
@@ -94,7 +110,11 @@ function Parent(){
 
   return(
     <>
-      <Api dane={currentCocktails} setDane={setDane}/>
+      <Api
+      dane={currentCocktails}
+      favoriteIds={favs}
+      onToggleFavorite={handleToggleFavorite}
+      />
       <Header name = {name} setName = {setName}/>
     </>
   )
@@ -122,7 +142,7 @@ function Header({name,setName}:HeaderProps){
   )
 }
 
-function Api({dane}:CocktailProps){
+function Api({dane, favoriteIds, onToggleFavorite}:CocktailProps){
   return (
     <div>
       <div className='grid-elements'>
@@ -134,6 +154,8 @@ function Api({dane}:CocktailProps){
                 <p>Ulubiony</p>
                 <input
                 type = "checkbox"
+                checked={favoriteIds.includes(item.id)}
+                onChange={() => onToggleFavorite(item.id)}
                 />
               </div>
             </div>
