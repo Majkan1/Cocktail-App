@@ -159,12 +159,12 @@ function Api({dane, favoriteIds, onToggleFavorite}:CocktailProps){
                 />
               </div>
             </div>
+            <p style={{margin:'2px'}}>Name:</p>
             <p style={{margin:'2px'}}>{item.name}</p>
-            <p style={{margin:'2px'}}>Category:{item.category}</p>
-            <p style={{margin:'2px'}}>Glass:{item.glass}</p>
+            <p style={{margin:'2px'}}>Alcoholic:</p>
             <p style={{margin:'2px'}}>{item.alcoholic ? 'Alcoholic' : 'Non-alcoholic'}</p>
             <img  src={item.imageUrl} alt={item.name}/>
-            <p style={{margin:'2px'}}>{item.ingredients?.map(i=>i.name).join(',')}</p>
+            <p style={{margin:'2px'}}>Ingredients:{item.ingredients?.map(i=>i.name).join(',')}</p>
           </div>
         ))}
       </div>
