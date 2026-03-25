@@ -39,7 +39,7 @@ src/
 - **Search** cocktails by name in real time
 - **Pagination** — 5 pages, 50 cocktails each
 - Each card shows:
-  - Name, category, glass type
+  - Name
   - Alcoholic / Non-alcoholic label
   - Cocktail image
   - Ingredient list
@@ -51,7 +51,7 @@ src/
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/your-repo-name.git
+git clone https://github.com/your-username/Cocktail-App.git
 
 # Navigate to the project folder
 cd your-repo-name
@@ -88,9 +88,6 @@ interface Ingredient {
 interface SingleCocktail {
   id: number
   name: string
-  glass: string
-  category: string
-  instructions: string
   alcoholic: boolean
   imageUrl: string
   ingredients: Ingredient[]
