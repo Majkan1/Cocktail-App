@@ -149,7 +149,6 @@ function Api({dane, favoriteIds, onToggleFavorite}:CocktailProps){
         {dane.map((item)=>(
           <div key={item.id} className='card'>
             <div className='upper-one'>
-              <p>{item.id}</p>
               <div className='above'>
                 <p>Ulubiony</p>
                 <input
@@ -159,10 +158,7 @@ function Api({dane, favoriteIds, onToggleFavorite}:CocktailProps){
                 />
               </div>
             </div>
-            <p style={{margin:'2px'}}>Name:</p>
             <p style={{margin:'2px'}}>{item.name}</p>
-            <p style={{margin:'2px'}}>Alcoholic:</p>
-            <p style={{margin:'2px'}}>{item.alcoholic ? 'Alcoholic' : 'Non-alcoholic'}</p>
             <img  src={item.imageUrl} alt={item.name}/>
             <p style={{margin:'2px'}}>Ingredients:{item.ingredients?.map(i=>i.name).join(',')}</p>
           </div>
