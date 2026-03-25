@@ -1,15 +1,13 @@
 import { useEffect,useState } from 'react'
-import { BrowserRouter, Routes, Route, Navigate, Link, useParams } from 'react-router-dom';
+import { Routes, Route, Navigate, Link, useParams } from 'react-router-dom';
 import './App.css'
 
 function App() {
   return (
-    <BrowserRouter>
       <Routes>
         <Route path="/page/:pageId" element={<Parent />} />
         <Route path="*" element={<Navigate to="/page/1" replace />} />
       </Routes>
-    </BrowserRouter>
   )
 }
 
@@ -35,7 +33,8 @@ interface CocktailProps {
 
 interface HeaderProps {
   name:string,
-  setName:(value:string)=>void
+  setName:(value:string)=>void,
+  pages:number[]
 }
 
 function Parent(){
@@ -91,50 +90,53 @@ function Parent(){
   const currentPage = parseInt(pageId || '1');
   const startIndex = (currentPage - 1) * 50;
   const currentCocktails = filterCocktails.slice(startIndex, startIndex + 50);
+  const pages = [1, 2, 3, 4, 5];
 
   return(
-    <>
+    <div className='page-shell'>
+      <Header name = {name} setName = {setName} pages={pages}/>
       <Api
       dane={currentCocktails}
       favoriteIds={favs}
       onToggleFavorite={handleToggleFavorite}
       />
-      <Header name = {name} setName = {setName}/>
-    </>
+    </div>
   )
 }
 
-function Header({name,setName}:HeaderProps){
+function Header({name,setName,pages}:HeaderProps){
   return (
-    <div className='Header'>
-      <div><nav><Link to="/page/1" style={{color: 'white', textDecoration: 'none'}}>Home</Link></nav></div>
+    <header className='Header'>
       <div>
+        <nav>
+          <Link to="/page/1" className='home-link'>Cocktail Atlas</Link>
+        </nav>
+      </div>
+      <div className='search-wrap'>
         <input className='Search-bar'
         placeholder='Search a cocktail'
         value = {name}
         onChange = {(e)=>setName(e.target.value)}
         />
       </div>
-      <div className='Numbers' style={{display: 'flex', gap: '10px'}}>
-        <Link to="/page/1">1</Link>
-        <Link to="/page/2">2</Link>
-        <Link to="/page/3">3</Link>
-        <Link to="/page/4">4</Link>
-        <Link to="/page/5">5</Link>
+      <div className='Numbers'>
+        {pages.map((page)=>(
+          <Link key={page} to={`/page/${page}`}>{page}</Link>
+        ))}
       </div>
-    </div>
+    </header>
   )
 }
 
 function Api({dane, favoriteIds, onToggleFavorite}:CocktailProps){
   return (
-    <div>
+    <main className='content-area'>
       <div className='grid-elements'>
         {dane.map((item)=>(
           <div key={item.id} className='card'>
             <div className='upper-one'>
               <div className='above'>
-                <p>Ulubiony</p>
+                <p className='favorite-label'>Favorite</p>
                 <input
                 type = "checkbox"
                 checked={favoriteIds.includes(item.id)}
@@ -142,13 +144,13 @@ function Api({dane, favoriteIds, onToggleFavorite}:CocktailProps){
                 />
               </div>
             </div>
-            <p style={{margin:'2px'}}>{item.name}</p>
+            <p className='drink-name'>{item.name}</p>
             <img  src={item.imageUrl} alt={item.name}/>
-            <p style={{margin:'2px'}}>Ingredients:{item.ingredients?.map(i=>i.name).join(',')}</p>
+            <p className='ingredients'>Ingredients: {item.ingredients?.map(i=>i.name).join(', ')}</p>
           </div>
         ))}
       </div>
-    </div>
+    </main>
   )
 }
 
