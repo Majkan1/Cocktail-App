@@ -62,27 +62,11 @@ function Parent(){
    const FetchCoctails = async  () =>{
     try {
       
-      const response1 = await fetch('https://cocktails.solvro.pl/api/v1/cocktails?page=1&perPage=50');
+      const response1 = await fetch('https://cocktails.solvro.pl/api/v1/cocktails?page=1&perPage=250');
       const data1 = await response1.json();
-
-      const response2 = await fetch('https://cocktails.solvro.pl/api/v1/cocktails?page=2&perPage=50');
-      const data2 = await response2.json();
-
-      const response3 = await fetch('https://cocktails.solvro.pl/api/v1/cocktails?page=3&perPage=50');
-      const data3 = await response3.json();
-
-      const response4 = await fetch('https://cocktails.solvro.pl/api/v1/cocktails?page=4&perPage=50');
-      const data4 = await response4.json();
-
-      const response5 = await fetch('https://cocktails.solvro.pl/api/v1/cocktails?page=5&perPage=50');
-      const data5 = await response5.json();
       
       const allCocktails = [
-        ...data1.data, 
-        ...data2.data, 
-        ...data3.data, 
-        ...data4.data, 
-        ...data5.data
+        ...data1.data
       ];
 
       const  List= await Promise.all(
