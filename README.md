@@ -51,7 +51,7 @@ src/
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/Cocktail-App.git
+git clone https://github.com/Majkan1/Cocktail-App.git
 
 # Navigate to the project folder
 cd your-repo-name
