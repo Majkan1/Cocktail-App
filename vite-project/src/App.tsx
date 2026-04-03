@@ -90,7 +90,7 @@ function Parent(){
   const currentPage = parseInt(pageId || '1');
   const startIndex = (currentPage - 1) * 50;
   const currentCocktails = filterCocktails.slice(startIndex, startIndex + 50);
-  const pages = [1, 2, 3, 4, 5];
+  const pages = [1, 2, 3, 4, 5,6];
 
   return(
     <div className='page-shell'>
