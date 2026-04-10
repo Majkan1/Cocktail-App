@@ -8,7 +8,6 @@ https://majkan1.github.io/Cocktail-App/
 
 ## 📸 Preview
 
-![Cocktail App Screenshot]
 <img width="1560" height="1026" alt="image" src="https://github.com/user-attachments/assets/99c61ef3-0f2c-4ad4-922f-b7bbac6f7473" />
 
 
