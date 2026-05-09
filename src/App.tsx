@@ -1,5 +1,6 @@
 import { useEffect,useState } from 'react'
 import { Routes, Route, Navigate, Link, useParams } from 'react-router-dom';
+import type { SingleCocktail, CocktailProps, HeaderProps } from './types';
 import './App.css'
 
 function App() {
@@ -9,32 +10,6 @@ function App() {
         <Route path="*" element={<Navigate to="/page/1" replace />} />
       </Routes>
   )
-}
-
-interface Ingredient {
-  name:string
-}
-interface SingleCocktail {
-  id:number,
-  name:string,
-  glass:string,
-  category:string,
-  instructions:string,
-  alcoholic:boolean,
-  imageUrl:string,
-  ingredients:Ingredient[]
-}
-
-interface CocktailProps {
-  dane:SingleCocktail[],
-  favoriteIds:number[],
-  onToggleFavorite:(cocktailId:number)=>void
-}
-
-interface HeaderProps {
-  name:string,
-  setName:(value:string)=>void,
-  pages:number[]
 }
 
 function Parent(){
